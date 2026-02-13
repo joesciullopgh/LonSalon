@@ -10,23 +10,29 @@ import {
   formatTime, formatDate, timeToMinutes, minutesToTime,
 } from './data/availability';
 
-// ─── Inline Style Helpers ───────────────────────────────────────────────────
+// ─── Fabulous Glam Theme (Elton John x Lady Gaga) ───────────────────────────
 const s = {
-  gold: '#C9A84C',
-  ivory: '#F5F0E8',
-  ivoryDim: 'rgba(245,240,232,0.6)',
-  black: '#0D0D0D',
-  surface: '#1A1A1A',
-  surfaceHover: '#252525',
-  surfaceLight: '#2A2A2A',
-  border: '#333',
-  rose: '#C4727F',
-  emerald: '#5B9A7D',
-  amber: '#D4A843',
-  goldDim: 'rgba(201,168,76,0.15)',
-  heading: "'Playfair Display', serif",
-  body: "'Cormorant Garamond', serif",
-  ui: "'Montserrat', sans-serif",
+  gold: '#FFD700',
+  ivory: '#FFF0FA',
+  ivoryDim: 'rgba(255,240,250,0.6)',
+  black: '#0A0012',
+  surface: '#150022',
+  surfaceHover: '#1E0033',
+  surfaceLight: '#220038',
+  border: '#3D1A5C',
+  rose: '#FF2D6B',
+  emerald: '#00E09E',
+  amber: '#FF8C00',
+  goldDim: 'rgba(255,215,0,0.12)',
+  hotPink: '#FF1493',
+  electricPurple: '#9B30FF',
+  neonBlue: '#00D4FF',
+  gradientPink: 'linear-gradient(135deg, #FF1493, #9B30FF)',
+  gradientGold: 'linear-gradient(135deg, #FFD700, #FF8C00)',
+  gradientGlam: 'linear-gradient(135deg, #FF1493, #9B30FF, #00D4FF)',
+  heading: "'Abril Fatface', serif",
+  body: "'Raleway', sans-serif",
+  ui: "'Outfit', sans-serif",
 };
 
 // ─── Tiny Utility Components ────────────────────────────────────────────────
@@ -36,18 +42,19 @@ function GoldButton({ children, onClick, style, disabled, small }) {
       onClick={onClick}
       disabled={disabled}
       style={{
-        background: disabled ? s.border : `linear-gradient(135deg, ${s.gold}, #b8963f)`,
-        color: disabled ? s.ivoryDim : s.black,
+        background: disabled ? s.border : s.gradientPink,
+        color: disabled ? s.ivoryDim : '#fff',
         fontFamily: s.ui,
-        fontWeight: 600,
+        fontWeight: 700,
         fontSize: small ? 12 : 14,
-        padding: small ? '6px 14px' : '10px 24px',
-        borderRadius: 6,
+        padding: small ? '6px 14px' : '12px 28px',
+        borderRadius: 24,
         border: 'none',
         cursor: disabled ? 'default' : 'pointer',
-        letterSpacing: 0.5,
+        letterSpacing: 1,
         textTransform: 'uppercase',
         transition: 'all 0.2s',
+        boxShadow: disabled ? 'none' : '0 4px 15px rgba(255,20,147,0.3)',
         ...style,
       }}
     >
@@ -57,7 +64,7 @@ function GoldButton({ children, onClick, style, disabled, small }) {
 }
 
 function OutlineButton({ children, onClick, style, small, color }) {
-  const c = color || s.gold;
+  const c = color || s.hotPink;
   return (
     <button
       onClick={onClick}
@@ -65,13 +72,13 @@ function OutlineButton({ children, onClick, style, small, color }) {
         background: 'transparent',
         color: c,
         fontFamily: s.ui,
-        fontWeight: 500,
+        fontWeight: 600,
         fontSize: small ? 11 : 13,
         padding: small ? '5px 12px' : '8px 18px',
-        borderRadius: 6,
-        border: `1px solid ${c}`,
+        borderRadius: 20,
+        border: `2px solid ${c}`,
         cursor: 'pointer',
-        letterSpacing: 0.5,
+        letterSpacing: 0.8,
         textTransform: 'uppercase',
         transition: 'all 0.2s',
         ...style,
@@ -86,18 +93,19 @@ function Badge({ count, style }) {
   if (!count) return null;
   return (
     <span style={{
-      background: s.rose,
+      background: s.hotPink,
       color: '#fff',
       fontSize: 10,
       fontFamily: s.ui,
       fontWeight: 700,
       borderRadius: 10,
-      padding: '1px 6px',
+      padding: '2px 7px',
       minWidth: 18,
       textAlign: 'center',
       position: 'absolute',
       top: -4,
       right: -4,
+      boxShadow: '0 0 8px rgba(255,20,147,0.5)',
       ...style,
     }}>
       {count > 99 ? '99+' : count}
@@ -116,14 +124,14 @@ function StatusBadge({ status }) {
     <span style={{
       fontSize: 10,
       fontFamily: s.ui,
-      fontWeight: 600,
+      fontWeight: 700,
       textTransform: 'uppercase',
-      letterSpacing: 1,
+      letterSpacing: 1.2,
       color: colors[status] || s.ivoryDim,
       background: `${colors[status] || s.border}22`,
-      padding: '2px 8px',
-      borderRadius: 4,
-      border: `1px solid ${colors[status] || s.border}44`,
+      padding: '3px 10px',
+      borderRadius: 12,
+      border: `1px solid ${colors[status] || s.border}55`,
     }}>
       {status}
     </span>
@@ -134,7 +142,7 @@ function Input({ label, value, onChange, type = 'text', placeholder, style, text
   const Tag = textarea ? 'textarea' : 'input';
   return (
     <div style={{ marginBottom: 12, ...style }}>
-      {label && <label style={{ fontSize: 12, fontFamily: s.ui, fontWeight: 500, color: s.ivoryDim, display: 'block', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>{label}</label>}
+      {label && <label style={{ fontSize: 11, fontFamily: s.ui, fontWeight: 600, color: s.hotPink, display: 'block', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 1 }}>{label}</label>}
       <Tag
         type={type}
         value={value}
@@ -145,13 +153,14 @@ function Input({ label, value, onChange, type = 'text', placeholder, style, text
           width: '100%',
           background: s.surfaceLight,
           border: `1px solid ${s.border}`,
-          borderRadius: 6,
-          padding: '10px 12px',
+          borderRadius: 10,
+          padding: '10px 14px',
           color: s.ivory,
           fontFamily: s.body,
-          fontSize: 16,
+          fontSize: 15,
           outline: 'none',
           resize: textarea ? 'vertical' : 'none',
+          transition: 'border-color 0.2s',
         }}
       />
     </div>
