@@ -358,8 +358,8 @@ export default function App() {
   // ── Auth Modal ──
   function AuthModal() {
     const [mode, setMode] = useState('login');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('lon@lonmichaels.com');
+    const [password, setPassword] = useState('admin123');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [showPw, setShowPw] = useState(false);
